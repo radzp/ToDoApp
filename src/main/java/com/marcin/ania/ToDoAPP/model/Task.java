@@ -1,5 +1,7 @@
 package com.marcin.ania.ToDoAPP.model;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -7,8 +9,9 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Task {
 
     @Id
-    private long id;
+    private Long id;
 
+    @NotEmpty
     private String description;
 
     private boolean isCompleted;
