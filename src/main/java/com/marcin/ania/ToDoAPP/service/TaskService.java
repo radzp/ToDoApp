@@ -31,10 +31,9 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    public Task save(String description, boolean isCompleted){
+    public Task save(String description){
         Task task = new Task();
         task.setDescription(description);
-        task.setCompleted(isCompleted);
         return task;
     }
 
@@ -43,7 +42,6 @@ public class TaskService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         task.setDescription(updatedTask.getDescription());
-        task.setCompleted(updatedTask.isCompleted());
 
         return taskRepository.save(task);
     }

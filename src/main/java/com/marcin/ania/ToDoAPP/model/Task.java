@@ -14,15 +14,12 @@ public class Task {
     @NotEmpty
     private String description;
 
-    private boolean isCompleted;
-
     public Task() {
     }
 
-    public Task(long id, String description, boolean isCompleted) {
+    public Task(long id, String description) {
         this.id = id;
         this.description = description;
-        this.isCompleted = isCompleted;
     }
 
     public long getId() {
@@ -41,11 +38,4 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
 }

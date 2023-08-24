@@ -37,7 +37,7 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public Task create(@RequestBody Task newTask){
-        return taskService.save(newTask.getDescription(),newTask.isCompleted());
+        return taskService.save(newTask.getDescription());
     }
 
     @PutMapping("/tasks/{id}")

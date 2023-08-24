@@ -53,14 +53,26 @@
 
     todoItems.forEach(item => {
         const statusBtn = item.querySelector('.status-btn');
+        const deleteBtn = item.querySelector('.delete-btn');
         const taskText = item.querySelector('.task-text');
 
         statusBtn.addEventListener('click', () => {
             statusBtn.querySelector('i').classList.toggle('fa-square');
             statusBtn.querySelector('i').classList.toggle('fa-check-square');
             taskText.classList.toggle('completed');
+
+            // Dodaj animację fade-out i usuń po zakończeniu animacji
+            item.classList.add('fade-out');
+            item.addEventListener('animationend', () => {
+                item.remove();
+            });
+        });
+
+        deleteBtn.addEventListener('click', () => {
+            // Obsługa usuwania po kliknięciu na przycisk deleteBtn (jeśli potrzebujesz)
         });
     });
+
 </script>
 </body>
 </html>
