@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const tasksList = document.getElementById('tasksList');
     const completedTabBtn = document.getElementById('completedTabBtn');
@@ -31,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Wystąpił błąd:', error);
         }
     }
+
+
     async function deleteTask(taskId) {
         try {
             const response = await fetch(`http://localhost:8080/tasks/${taskId}`, {
@@ -46,6 +47,36 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
             console.error('Wystąpił błąd:', error);
         }
+    }
+
+
+    async function statusTask(task){
+        const taskId = task.id;
+        const taskDescription = task.description;
+        const isCompleted = task.is_completed;
+        try{
+            const response = await fetch(`http://localhost:8080/tasks/${taskId}`, {
+                method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                description: taskDescription,
+                is_completed: !isCompleted
+            })
+            });
+
+            if (!response.ok) {
+                console.error('Wystąpił błąd.');
+                return;
+            }
+
+            await fetchAndDisplayTasks();
+
+        } catch(error){
+            console.error('Wystąpił błąd:', error);
+        }
+
     }
 
     function createTaskElement(task) {
@@ -81,8 +112,10 @@ document.addEventListener("DOMContentLoaded", function () {
         taskItem.appendChild(editBtn);
 
         statusBtn.addEventListener('click', () => {
+            statusTask(task);
             toggleTaskCompletion(taskItem, task);
         });
+
         deleteBtn.addEventListener('click', () => {
             const shouldDelete = confirm("Are you sure? This will delete this task.");
             if (shouldDelete) {
