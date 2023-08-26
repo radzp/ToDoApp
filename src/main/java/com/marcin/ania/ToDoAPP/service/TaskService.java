@@ -34,7 +34,7 @@ public class TaskService {
     public Task save(String description){
         Task task = new Task();
         task.setDescription(description);
-        return task;
+        return taskRepository.save(task); // Save in database
     }
 
     public Task updateTask(Long id, Task updatedTask) {
