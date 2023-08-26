@@ -5,11 +5,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const allTabBtn = document.getElementById('allTabBtn');
     const addButton = document.getElementById('addButton'); // New line
     const newTaskInput = document.getElementById('newTask'); // New line
+    const progressBar = document.getElementById('progress');
     let showCompletedTasks = null;
+    let allTasksCounter = 0;
+    let completedTasksCounter = 0;
 
     allTabBtn.classList.add('tab-btn');
     completedTabBtn.classList.add('tab-btn');
     activeTabBtn.classList.add('tab-btn');
+
 
     async function fetchAndDisplayTasks() {
         try {
@@ -24,15 +28,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tasksList.innerHTML = '';
 
+            allTasksCounter = 0;
+            completedTasksCounter = 0;
+
             tasks.forEach(task => {
+                allTasksCounter++;
+                if(task.is_completed){
+                    completedTasksCounter++;
+                }
                 const taskItem = createTaskElement(task);
                 if (showCompletedTasks === null || (showCompletedTasks && task.is_completed) || (!showCompletedTasks && !task.is_completed)) {
                     tasksList.appendChild(taskItem);
                 }
             });
+            updateProgressBar();
+              
         } catch (error) {
             console.error('Wystąpił błąd:', error);
         }
+         
     }
 
 
@@ -48,9 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             await fetchAndDisplayTasks(); // Aktualizacja listy po usunięciu zadania
+              
         } catch (error) {
             console.error('Wystąpił błąd:', error);
         }
+         
     }
 
 
@@ -76,11 +92,26 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             await fetchAndDisplayTasks();
+              
 
         } catch(error){
             console.error('Wystąpił błąd:', error);
         }
+         
+    }
 
+    let previousResult = -1; // Inicjalizujemy poprzednią wartość result na wartość, która na pewno się nie pojawi
+
+    function updateProgressBar() {
+        const newResult = (completedTasksCounter / allTasksCounter) * 100;
+        const roundedResult = Math.round(newResult); // Zaokrąglamy wynik w gore
+
+        if (roundedResult !== previousResult) {
+            previousResult = roundedResult; // Zapisujemy nową wartość result jako poprzednią
+            progressBar.setAttribute("aria-valuenow", roundedResult.toString());
+            progressBar.innerText = roundedResult.toString() + "%";
+            progressBar.style.width = roundedResult.toString() + "%";
+        }
     }
     
     function changeToInputBtns(taskItem, editInput, confirmBtn, abortBtn, statusBtn, taskText, deleteBtn, editBtn){
@@ -127,6 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         statusBtn.addEventListener('click', () => {
             statusTask(task);
+              
             toggleTaskCompletion(taskItem, task);
         });
         
@@ -220,22 +252,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 taskItem.querySelector('.task-text').classList.remove('completed');
             }
         }
+         
     }
 
 
     completedTabBtn.addEventListener('click', () => {
         showCompletedTasks = true;
         fetchAndDisplayTasks();
+          
+         
     });
 
     activeTabBtn.addEventListener('click', () => {
         showCompletedTasks = false;
         fetchAndDisplayTasks();
+          
+         
     });
 
     allTabBtn.addEventListener('click', () => {
         showCompletedTasks = null;
         fetchAndDisplayTasks();
+          
+         
     });
 
     addButton.addEventListener('click', async () => {
@@ -260,12 +299,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 newTaskInput.value = '';
                 await fetchAndDisplayTasks();
+                  
             } catch (error) {
                 console.error('Wystąpił błąd:', error);
             }
         }
+
     });
 
     fetchAndDisplayTasks();
+      
 });
-

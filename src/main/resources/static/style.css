@@ -10,7 +10,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(47, 16, 82, 0.62);
+    background: linear-gradient(to right, rgba(47, 16, 82, 0.62), rgba(71, 4, 152, 0.61));
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
