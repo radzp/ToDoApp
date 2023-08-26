@@ -97,20 +97,26 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch(error){
             console.error('Wystąpił błąd:', error);
         }
-         
     }
 
-    let previousResult = -1; // Inicjalizujemy poprzednią wartość result na wartość, która na pewno się nie pojawi
+    let previousResult = -1;
 
     function updateProgressBar() {
-        const newResult = (completedTasksCounter / allTasksCounter) * 100;
-        const roundedResult = Math.round(newResult); // Zaokrąglamy wynik w gore
+        if (allTasksCounter === 0) {
+            progressBar.setAttribute("aria-valuenow", '0');
+            progressBar.innerText = '0' + "%";
+            progressBar.style.width = '0' + "%";
 
-        if (roundedResult !== previousResult) {
-            previousResult = roundedResult; // Zapisujemy nową wartość result jako poprzednią
-            progressBar.setAttribute("aria-valuenow", roundedResult.toString());
-            progressBar.innerText = roundedResult.toString() + "%";
-            progressBar.style.width = roundedResult.toString() + "%";
+        } else {
+            const newResult = (completedTasksCounter / allTasksCounter) * 100;
+            const roundedResult = Math.round(newResult);
+
+            if (roundedResult !== previousResult) {
+                previousResult = roundedResult;
+                progressBar.setAttribute("aria-valuenow", roundedResult.toString());
+                progressBar.innerText = roundedResult.toString() + "%";
+                progressBar.style.width = roundedResult.toString() + "%";
+            }
         }
     }
     
