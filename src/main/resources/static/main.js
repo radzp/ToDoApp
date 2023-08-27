@@ -169,14 +169,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         
         editBtn.addEventListener('click', () => {
-            const textHolder = taskText.textContent;
+            const textHolder = taskText.textContent.trim();
             taskItem.removeChild(statusBtn);
             taskItem.removeChild(taskText);
             taskItem.removeChild(deleteBtn);
             taskItem.removeChild(editBtn);
             const editInput = document.createElement('input');
             editInput.classList.add('form-control', 'edit-input');
-            editInput.value = textHolder;
+            editInput.value = textHolder
             const confirmBtn = document.createElement('button');
             confirmBtn.classList.add('confirm-btn');
             confirmBtn.innerHTML = '<i class="fa-solid fa-check fa-beat" style="color: #48d433;"></i>';
@@ -192,10 +192,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             confirmBtn.addEventListener('click', async () =>{
-                if(editInput.value.trim() === textHolder.trim()){
-                    changeToInputBtns(taskItem, editInput, confirmBtn, abortBtn, statusBtn, taskText, deleteBtn, editBtn);
-                    return;
-                }
                 const taskId = task.id;
                 try{
                     const response = await fetch(`http://localhost:8080/tasks/${taskId}`, {
