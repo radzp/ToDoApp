@@ -1,4 +1,10 @@
 
+.todo-container strong {
+    font-size: 40px;
+    color: #0e202e;
+    font-family: 'Montserrat', sans-serif;
+}
+
 body {
     background: url("background.jpg") no-repeat;
     backdrop-filter: blur(4px);
@@ -17,15 +23,17 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background: linear-gradient(to right, rgb(82, 152, 187), rgba(100, 145, 160, 0.9));
-    border-radius: 8px;
+    background: linear-gradient(to right, rgb(82, 152, 187), rgba(26, 56, 66, 0.87));
+    border-radius: 12px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .todo-item {
+    background-color: #67a4c5;
+    border-radius: 8px;
     display: flex;
     align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #5a6269;
+    padding: 6px 0;
+    margin-bottom: 8px;
 }
 .todo-item:last-child {
     border-bottom: none;
@@ -44,39 +52,51 @@ body {
 }
 .status-btn{
     margin-right: 10px;
-    color: mediumpurple;
+    margin-left: 10px;
+    color: #0e202e;
 }
 .delete-btn {
     color: rgba(255, 0, 0, 0.98);
     margin-left: auto;
 }
 .edit-btn {
-    color: #007bff;
+    color: #0d6efc;
+    margin-right: 2px;
 }
 
 .tab-btn {
-    background-color: rgba(24, 6, 42, 0.62);
+    background-color: rgb(33, 74, 96);
     border: none;
-    margin-bottom: 12px;
+    margin-bottom: 25px;
+}
+.tab-btn:hover{
+    scale: 110%;
 }
 
 .completed {
     text-decoration: line-through;
-    color: #6c757d;
+    color: rgba(64, 64, 64, 0.83);
 }
 
 .edit-input:valid {
-    background-color: rgba(21, 7, 37, 0.62);
+    background-color: rgb(33, 74, 96);
     color: white;
+    margin-left: 5px;
+    border: none;
 }
-
-/* Gradient dla napisu ToDo i List */
-.gradient-text {
-    background: linear-gradient(to right, #007bff, #800080);
-    -webkit-background-clip: text;
-    color: transparent;
-    display: inline;
+.progress-group{
+    margin-top: 25px;
 }
+#progress{
+    height: 15px;
+}
+/*!* Gradient dla napisu ToDo i List *!*/
+/*.gradient-text {*/
+/*    background: linear-gradient(to right, #007bff, #800080);*/
+/*    -webkit-background-clip: text;*/
+/*    color: transparent;*/
+/*    display: inline;*/
+/*}*/
 
 .fade-out {
     animation: fadeOut 0.5s ease-in-out forwards;

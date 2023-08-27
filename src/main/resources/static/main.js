@@ -137,9 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const statusBtn = document.createElement('span');
         statusBtn.classList.add('status-btn');
         if (task.is_completed) {
-            statusBtn.innerHTML = '<i class="far fa-check-square me-2"></i>';
+            statusBtn.innerHTML = '<i class="far fa-regular fa-check-square me-2 fa-lg"></i>';
         } else {
-            statusBtn.innerHTML = '<i class="far fa-square me-2"></i>';
+            statusBtn.innerHTML = '<i class="far fa-regular fa-square me-2 fa-lg"></i>';
         }
 
         const taskText = document.createElement('span');
@@ -179,10 +179,10 @@ document.addEventListener("DOMContentLoaded", function () {
             editInput.value = textHolder
             const confirmBtn = document.createElement('button');
             confirmBtn.classList.add('confirm-btn');
-            confirmBtn.innerHTML = '<i class="fa-solid fa-check fa-beat" style="color: #48d433;"></i>';
+            confirmBtn.innerHTML = '<i class="fa-solid fa-check fa-beat" style="color: #20ff00;"></i>';
             const abortBtn = document.createElement('button');
             abortBtn.classList.add('abort-btn');
-            abortBtn.innerHTML = '<i class="fa-solid fa-x fa-beat" style="color: #e32400;"></i>';
+            abortBtn.innerHTML = '<i class="fa-solid fa-x fa-beat" style="color: #ff0505;"></i>';
             taskItem.appendChild(editInput);
             taskItem.appendChild(confirmBtn);
             taskItem.appendChild(abortBtn);
@@ -306,7 +306,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Wystąpił błąd:', error);
             }
         }
-
     });
 
     fetchAndDisplayTasks();
