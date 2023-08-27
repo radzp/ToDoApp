@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            description: editInput.value,
+                            description: editInput.value.trim(),
                             is_completed: task.is_completed
                         })
                     });
