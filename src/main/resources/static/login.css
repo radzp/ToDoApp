@@ -18,26 +18,33 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    transition: height .2s ease;
+}
+.wrapper.active{
+    height: 520px;
 }
 .wrapper .form-box{
     width: 100%;
     padding: 40px;
 }
-.wrapper .icon-close{
+
+.wrapper .form-box.login{
+    /*display: none;*/
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+.wrapper.active .form-box.login{
+    transition: none;
+    transform: translateX(-400px);
+}
+.wrapper .form-box.register{
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 45px;
-    height: 45px;
-    background: #162938;
-    font-size: 2em;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom-left-radius: 20px;
-    cursor: pointer;
-    z-index: 1;
+    transition: none;
+    transform: translateX(400px);
+}
+.wrapper.active .form-box.register{
+    transition: transform .18s ease;
+    transform: translateX(0px);
 }
 .form-box h2{
     font-size: 2em;
@@ -64,9 +71,12 @@
 }
 
 .input-box input:focus~label,
+.input-box input:not(:placeholder-shown) ~ label,
 .input-box input:valid~label{
     top: -5px;
 }
+
+
 
 .input-box input{
     width: 100%;
