@@ -1,6 +1,13 @@
 
 body {
-    background-color: #12021f;
+    background: url("background.jpg") no-repeat;
+    backdrop-filter: blur(4px);
+    height: 100%;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     color: #fff;
     font-size: 18px;
     font-family: Arial, sans-serif;
@@ -10,7 +17,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background: linear-gradient(to right, rgba(47, 16, 82, 0.62), rgba(71, 4, 152, 0.61));
+    background: linear-gradient(to right, rgb(82, 152, 187), rgba(100, 145, 160, 0.9));
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
