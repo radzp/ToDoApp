@@ -6,7 +6,7 @@
 }
 
 body {
-    background: url("background.jpg") no-repeat;
+    background: url("../images/background.jpg") no-repeat;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     height: 100%;

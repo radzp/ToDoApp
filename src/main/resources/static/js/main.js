@@ -87,7 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (!response.ok) {
-                console.error('Wystąpił błąd.');
+                console.error('Wystąpił błąd.' + response.statusText);
+
                 return;
             }
 
