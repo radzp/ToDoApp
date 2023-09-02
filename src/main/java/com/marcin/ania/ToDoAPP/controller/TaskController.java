@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@RequestMapping("/tasks")
 public class TaskController {
 
     //dependency injection
@@ -18,38 +19,30 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/tasks")
+    @GetMapping("")
     public Iterable<Task> getAll() {
         return taskService.getAll();
     }
 
-    @GetMapping("/tasks/{id}")
+    @GetMapping("/{id}")
     public Task get(@PathVariable Long id) {
         Task task = taskService.get(id);
         if (task == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return task;
     }
 
-    @DeleteMapping("/tasks/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         taskService.remove(id);
     }
 
-    @PostMapping("/tasks")
+    @PostMapping("")
     public Task create(@RequestBody Task newTask){
         return taskService.save(newTask.getDescription(),newTask.getIs_completed());
     }
 
-    @PutMapping("/tasks/{id}")
+    @PutMapping("/{id}")
     public Task edit(@PathVariable Long id, @RequestBody Task newTask){
         return taskService.updateTask(id, newTask);
     }
-
-
-
-
-
-
-
-
 }
