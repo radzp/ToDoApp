@@ -47,12 +47,12 @@
     </div>
     <div class="form-box register">
         <h2>Registration</h2>
-        <form action="#">
+        <form th:action="@{/register}" th:object="${UserInfo}" method="post">
             <div class="input-box">
                 <span class="icon">
                     <ion-icon name="person-outline"></ion-icon>
                 </span>
-                <input type="text" class="input-field" placeholder=" " required>
+                <input name="username" type="text" class="input-field" placeholder=" " required>
                 <label class="input-label">Username</label>
 
             </div>
@@ -60,7 +60,7 @@
                 <span class="icon">
                     <ion-icon name="mail-outline"></ion-icon>
                 </span>
-                <input type="email" class="input-field" placeholder=" " required>
+                <input name="email" type="email" class="input-field" placeholder=" " required>
                 <label class="input-label">Email</label>
 
             </div>
@@ -68,13 +68,13 @@
                 <span class="icon">
                     <ion-icon name="lock-closed-outline"></ion-icon>
                 </span>
-                <input type="password" class="input-field" placeholder=" " required>
+                <input name="password" type="password" class="input-field" placeholder=" " required>
                 <label class="input-label">Password</label>
             </div>
             <div class="remember-forgot">
                 <label ><input type="checkbox"> I agree to the <a href="#" style="font-weight: bold">terms & conditions</a></label>
             </div>
-            <button type="submit" class="btn">
+            <button type="submit" class="btn" onclick="location.href login.html">
                 Register
             </button>
             <div class="login-register">
@@ -85,23 +85,3 @@
 </div>
 </body>
 </html>
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <title>Spring Security Example </title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div th:if="${param.error}">-->
-<!--    Invalid username and password.-->
-<!--</div>-->
-<!--<div th:if="${param.logout}">-->
-<!--    You have been logged out.-->
-<!--</div>-->
-<!--<form th:action="@{/login}" method="post">-->
-<!--    <div><label> User Name : <input type="text" name="username"/> </label></div>-->
-<!--    <div><label> Password: <input type="password" name="password"/> </label></div>-->
-<!--    <div><input type="submit" value="Sign In"/></div>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
