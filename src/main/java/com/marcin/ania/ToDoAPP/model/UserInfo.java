@@ -23,6 +23,6 @@ public class UserInfo {
 
     private String password;
 
-    private UserRole roles;
+    private String roles;
 
 }

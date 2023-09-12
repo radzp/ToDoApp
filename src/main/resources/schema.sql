@@ -1,11 +1,11 @@
 create table if not exists TASK
 (
-    id INT PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
     description varchar(255),
     is_completed boolean
 );
-create table if not exists USERINFO(
-    id INT PRIMARY KEY NOT NULL,
+create table if not exists user_info(
+    id SERIAL PRIMARY KEY NOT NULL,
     username varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     password varchar(255) NOT NULL,

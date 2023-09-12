@@ -147,3 +147,10 @@
 .login-register p a:hover{
     text-decoration: underline;
 }
+.errorLogin {
+    color: #9f363f;
+    background: #f3dcdd;
+    margin-top: 12px;
+    border-radius: 9px;
+    padding-left: 14px;
+}

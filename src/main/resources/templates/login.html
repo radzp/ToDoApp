@@ -38,6 +38,8 @@
             <button type="submit" class="btn">
                 Login
             </button>
+            <div class="errorLogin" th:if="${param.error}">
+                Invalid username or password.</div>
             <div class="login-register">
                 <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
             </div>
