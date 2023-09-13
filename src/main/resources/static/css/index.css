@@ -287,11 +287,14 @@ body {
 .clock-face span:nth-child(12) { transform:                translateY(-75px)  translateX(-2px);}
 
 .digital-clock {
+    width: 50%;
+    margin-top: 3%;
+    margin-left: 25%;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
-    margin-top: 220px; /* Dystans między zegarami */
     background: #0e202e;
+
     border-radius: 25px;
     border-color: #19364f;
     border-style: solid;
