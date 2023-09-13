@@ -1,10 +1,4 @@
 
-.todo-container strong {
-    font-size: 40px;
-    color: #0e202e;
-    font-family: 'Montserrat', sans-serif;
-}
-
 body {
     background: url("../images/background.jpg") no-repeat;
     backdrop-filter: blur(4px);
@@ -19,85 +13,6 @@ body {
     font-size: 18px;
     font-family: Arial, sans-serif;
 }
-.todo-container {
-    width: 90%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background: linear-gradient(to right, rgb(82, 152, 187), rgba(26, 56, 66, 0.87));
-    border-radius: 12px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.todo-item {
-    background-color: #67a4c5;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    padding: 6px 0;
-    margin-bottom: 8px;
-}
-.todo-item:last-child {
-    border-bottom: none;
-}
-.input-group{
-    padding-bottom: 18px;
-}
-.delete-btn,
-.edit-btn,
-.status-btn,
-.abort-btn,
-.confirm-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-.status-btn{
-    margin-right: 10px;
-    margin-left: 10px;
-    color: #0e202e;
-}
-.delete-btn {
-    color: rgba(255, 0, 0, 0.98);
-    margin-left: auto;
-}
-.edit-btn {
-    color: #0d6efc;
-    margin-right: 2px;
-}
-
-.tab-btn {
-    background-color: rgb(33, 74, 96);
-    border: none;
-    margin-bottom: 25px;
-}
-.tab-btn:hover{
-    scale: 110%;
-}
-
-.completed {
-    text-decoration: line-through;
-    color: rgba(64, 64, 64, 0.83);
-}
-
-.edit-input:valid {
-    background-color: rgb(33, 74, 96);
-    color: white;
-    margin-left: 5px;
-    border: none;
-}
-.progress-group{
-    margin-top: 25px;
-}
-#progress{
-    height: 15px;
-}
-/*!* Gradient dla napisu ToDo i List *!*/
-/*.gradient-text {*/
-/*    background: linear-gradient(to right, #007bff, #800080);*/
-/*    -webkit-background-clip: text;*/
-/*    color: transparent;*/
-/*    display: inline;*/
-/*}*/
 
 .fade-out {
     animation: fadeOut 0.5s ease-in-out forwards;

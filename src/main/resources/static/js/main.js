@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.getElementById('addButton'); // New line
     const newTaskInput = document.getElementById('newTask'); // New line
     const progressBar = document.getElementById('progress');
+    const usernameField = document.getElementById('usernameField');
+    let username = null;
     let showCompletedTasks = null;
     let allTasksCounter = 0;
     let completedTasksCounter = 0;
@@ -41,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     tasksList.appendChild(taskItem);
                 }
             });
+            await getUsername();
             updateProgressBar();
               
         } catch (error) {
@@ -48,6 +51,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
          
     }
+
+    async function getUsername(){
+        try{
+            const response = await fetch('http://localhost:8080/user/username');
+            if (!response.ok) {
+                console.error('Wystąpił błąd podczas pobierania danych.');
+                return;
+            }
+            username = await response.text();
+            usernameField.innerText = username;
+        }catch (error) {
+            console.error('Wystąpił błąd:', error);
+        }
+
+    }
+
 
 
     async function deleteTask(taskId) {

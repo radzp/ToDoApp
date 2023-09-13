@@ -48,7 +48,9 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/")
                         .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll);
+                .logout((logout) -> logout
+                        .logoutSuccessUrl("/login")
+                        .permitAll());
 
         return http.build();
     }

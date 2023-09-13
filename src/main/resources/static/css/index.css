@@ -1,0 +1,172 @@
+
+body {
+    background: url("../images/background.jpg") no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    margin: 0; /* Remove default margin */
+    font-family: Arial, sans-serif; /* Add a fallback font */
+}
+
+
+.sidebar .nav-link {
+    padding: 10px 20px;
+    color: #29a781;
+}
+
+.sidebar .nav-link:hover {
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.user-profile {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.user-profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Add box shadow */
+}
+
+
+.todo-container h2 {
+    color: #ffffff; /* Darker text color */
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #1e3a3a;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0e2424; /* Darker on hover */
+}
+
+#tasksList {
+    list-style: none;
+    padding: 0;
+}
+
+#tasksList li {
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #90adbf;
+    border-radius: 5px; /* Add border radius */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.13); /* Add box shadow */
+}
+
+.progress-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.progress {
+    background-color: #f4f4f4;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    background-color: #1e3a3a;
+}
+
+/* ... (previous styles) ... */
+
+.sidebar {
+    background-color: #0e202e;
+    color: #fff;
+    min-width: 180px;
+    max-width: 180px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.main {
+    padding: 20px;
+    margin-left: 250px; /* Width of the sidebar */
+    transition: margin-left 0.3s ease; /* Add transition for smooth effect */
+}
+
+.todo-container {
+    background-color: rgba(80, 137, 167, 0.73);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    min-height: calc(100vh - 40px);
+    overflow-y: auto;
+    width: 100%; /* Make the todo-container full width */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 1500px) {
+
+    .main {
+        margin-left: 180px; /* Adjust the margin for the main content */
+    }
+}
+
+.todo-item {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    margin-bottom: 8px;
+}
+.todo-item:last-child {
+    border-bottom: none;
+}
+.input-group{
+    padding-bottom: 18px;
+}
+.delete-btn,
+.edit-btn,
+.status-btn,
+.abort-btn,
+.confirm-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.status-btn{
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #0e202e;
+}
+.delete-btn {
+    color: rgba(255, 0, 0, 0.98);
+    margin-left: auto;
+}
+.edit-btn {
+    color: #0d6efc;
+    margin-right: 2px;
+}
+
+.tab-btn:hover{
+    scale: 110%;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: rgba(64, 64, 64, 0.83);
+}
+
+.edit-input:valid {
+    background-color: rgb(33, 74, 96);
+    color: white;
+    margin-left: 5px;
+    border: none;
+}
+
+/* ... (rest of the styles) ... */
+
