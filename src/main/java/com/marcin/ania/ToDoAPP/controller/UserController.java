@@ -1,6 +1,5 @@
 package com.marcin.ania.ToDoAPP.controller;
 
-import com.marcin.ania.ToDoAPP.model.Task;
 import com.marcin.ania.ToDoAPP.model.UserInfo;
 import com.marcin.ania.ToDoAPP.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

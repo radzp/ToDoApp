@@ -1,16 +1,16 @@
 package com.marcin.ania.ToDoAPP.model;
 
-import com.marcin.ania.ToDoAPP.roles.UserRole;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class UserInfo {
 
     @Id
@@ -24,5 +24,18 @@ public class UserInfo {
     private String password;
 
     private String roles;
+
+    public UserInfo(String username, String email, String password, String roles){
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+    @OneToMany(
+            mappedBy = "userinfo",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Task> taskList = new ArrayList<>();
 
 }
