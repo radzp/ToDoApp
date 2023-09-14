@@ -22,30 +22,61 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Metoda wymagana do implementacji interfejsu UserDetailsService, używana do logowania użytkownika.
+     *
+     * @param username Nazwa użytkownika.
+     * @return Obiekt UserDetails, który reprezentuje użytkownika w systemie.
+     * @throws UsernameNotFoundException Jeśli użytkownik o podanej nazwie nie zostanie znaleziony.
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       Optional<UserInfo> user =  userRepository.findByUsername(username);
-       return user.map(UserUserDetails::new).orElseThrow(() -> new UsernameNotFoundException("User not found "+ user));
+        Optional<UserInfo> user = userRepository.findByUsername(username);
+
+        // Sprawdza, czy użytkownik o podanej nazwie istnieje
+        return user.map(UserUserDetails::new).orElseThrow(() -> new UsernameNotFoundException("User not found " + user));
     }
 
-    // Add new user
+    /**
+     * Dodaje nowego użytkownika do bazy danych.
+     *
+     * @param userInfo Informacje o nowym użytkowniku.
+     * @return Komunikat potwierdzający zapisanie użytkownika.
+     */
     public String addUser(UserInfo userInfo){
+        // Szyfruje hasło przed zapisaniem w bazie danych
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+        // Zapisuje użytkownika w repozytorium
         userRepository.save(userInfo);
         return "User has been saved";
     }
 
-    // Get all users
+    /**
+     * Zwraca listę wszystkich użytkowników.
+     *
+     * @return Lista wszystkich użytkowników.
+     */
     public List<UserInfo> getAllUsers() {
         return userRepository.findAll();
     }
 
-    // Get user by ID
+    /**
+     * Zwraca użytkownika na podstawie jego ID.
+     *
+     * @param id Identyfikator użytkownika.
+     * @return Obiekt Optional zawierający informacje o użytkowniku lub pusty, jeśli użytkownik o podanym ID nie istnieje.
+     */
     public Optional<UserInfo> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    // Update user
+    /**
+     * Aktualizuje dane użytkownika.
+     *
+     * @param id       Identyfikator użytkownika do aktualizacji.
+     * @param userInfo Nowe informacje o użytkowniku.
+     * @return Zaktualizowane informacje o użytkowniku lub null, jeśli użytkownik o podanym ID nie istnieje.
+     */
     public UserInfo updateUser(Long id, UserInfo userInfo) {
         Optional<UserInfo> user = userRepository.findById(id);
         if (user.isPresent()) {
@@ -59,13 +90,20 @@ public class UserService implements UserDetailsService {
         return null;
     }
 
-    // Delete all users
+    /**
+     * Usuwa wszystkich użytkowników z bazy danych.
+     */
     public void deleteAllUsers() {
         userRepository.deleteAll();
     }
 
-    // Delete user
+    /**
+     * Usuwa użytkownika na podstawie jego ID.
+     *
+     * @param id Identyfikator użytkownika do usunięcia.
+     */
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
 }

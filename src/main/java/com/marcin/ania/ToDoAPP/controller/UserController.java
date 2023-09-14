@@ -18,26 +18,35 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
+    // Endpoint do dodawania nowego użytkownika
     @PostMapping("/new")
     public String addNewUser(@RequestBody UserInfo userInfo){
+        // Wywołanie metody z serwisu do dodawania użytkownika i zwrócenie wyniku
         return userService.addUser(userInfo);
     }
+
+    // Endpoint do pobierania listy wszystkich użytkowników
     @GetMapping("/all")
     public List<UserInfo> getAll(){
+        // Wywołanie metody z serwisu do pobierania wszystkich użytkowników
         return userService.getAllUsers();
     }
 
+    // Endpoint do pobierania konkretnego użytkownika na podstawie ID
     @GetMapping("/{id}")
     public Optional<UserInfo> get(@PathVariable Long id) {
+        // Wywołanie metody z serwisu do pobierania użytkownika na podstawie ID
         Optional<UserInfo> userInfo = userService.getUserById(id);
+        // Jeśli użytkownik nie został znaleziony, zwróć błąd NOT FOUND (404)
         if (userInfo.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return userInfo;
     }
 
+    // Endpoint do pobierania nazwy aktualnie zalogowanego użytkownika
     @GetMapping(value = "/username")
     @ResponseBody
     public String currentUserName(Authentication authentication) {
+        // Pobranie nazwy użytkownika z obiektu Authentication
         return authentication.getName();
     }
 }

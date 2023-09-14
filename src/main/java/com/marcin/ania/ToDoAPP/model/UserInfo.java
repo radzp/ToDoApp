@@ -1,5 +1,6 @@
 package com.marcin.ania.ToDoAPP.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,11 +32,13 @@ public class UserInfo {
         this.password = password;
         this.roles = roles;
     }
+    // Relacja jeden do wielu z klasą Task - jeden użytkownik może mieć wiele zadań
     @OneToMany(
-            mappedBy = "userinfo",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            mappedBy = "userinfo", // Nazwa pola w klasie Task, które wskazuje na użytkownika
+            cascade = CascadeType.ALL, // Wszystkie operacje (np. usuwanie zadań), będą propagowane do powiązanych zadań
+            orphanRemoval = true // Jeśli zadanie nie ma przypisanego użytkownika, zostanie usunięte
     )
+    @JsonManagedReference // Oznacza, że ta strona relacji (UserInfo) jest właścicielem i zostanie zserializowana
     private List<Task> taskList = new ArrayList<>();
 
 }

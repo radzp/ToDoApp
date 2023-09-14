@@ -21,33 +21,35 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    // Konfiguracja usługi do obsługi szczegółów użytkowników
     @Bean
     public UserDetailsService userDetailsService(){
         return new UserService();
-}
+    }
 
+    // Konfiguracja łańcucha filtrów zabezpieczeń
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
         http
+                // Ustalanie, które żądania są dozwolone, a które wymagają autoryzacji
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(mvc.pattern("/static/**")).permitAll()
                         .requestMatchers(mvc.pattern("/")).authenticated()
                         .requestMatchers(mvc.pattern("/tasks/**")).permitAll()
                         .requestMatchers(mvc.pattern("/tasks")).permitAll()
                         .requestMatchers(mvc.pattern("/**"), mvc.pattern("/user/new")).permitAll()
-//                        .requestMatchers(mvc.pattern(HttpMethod.POST, "/tasks/**")).authenticated()
-//                        .requestMatchers(mvc.pattern(HttpMethod.GET, "/login")).permitAll()
-//                        .requestMatchers(mvc.pattern(HttpMethod.PUT, "/tasks/**")).authenticated()
-//                        .requestMatchers(mvc.pattern(HttpMethod.DELETE, "/tasks/**")).authenticated()
                         .anyRequest().permitAll()
                 )
+                // Wyłączenie ochrony przed atakami CSRF
                 .csrf(AbstractHttpConfigurer::disable)
+                // Konfiguracja formularza logowania
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/")
                         .permitAll()
                 )
+                // Konfiguracja wylogowania
                 .logout((logout) -> logout
                         .logoutSuccessUrl("/login")
                         .permitAll());
@@ -55,11 +57,13 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // Konfiguracja enkodera hasła
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    // Konfiguracja dostępu do obiektów ModelAndView
     @Scope("prototype")
     @Bean
     MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector)
@@ -67,6 +71,7 @@ public class SecurityConfig {
         return new MvcRequestMatcher.Builder(introspector);
     }
 
+    // Konfiguracja dostawcy autoryzacji
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -76,3 +81,4 @@ public class SecurityConfig {
     }
 
 }
+

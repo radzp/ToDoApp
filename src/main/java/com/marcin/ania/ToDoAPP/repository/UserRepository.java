@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserInfo,Long> {
+    // Metoda do pobierania użytkownika na podstawie nazwy użytkownika
     Optional<UserInfo> findByUsername(String username);
 }

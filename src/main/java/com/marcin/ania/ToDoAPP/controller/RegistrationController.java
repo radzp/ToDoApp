@@ -15,16 +15,23 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
+    // Metoda obsługująca GET request na endpoint /register
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
+        // Dodanie nowego obiektu UserInfo do modelu, który będzie wykorzystywany w formularzu rejestracji
         model.addAttribute("UserInfo", new UserInfo());
+        // Zwrócenie widoku "login", który zawiera formularz rejestracji
         return "login";
     }
 
+    // Metoda obsługująca POST request na endpoint /register
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("UserInfo") UserInfo userInfo){
+        // Ustawienie roli użytkownika jako "USER"
         userInfo.setRoles("USER");
+        // Wywołanie metody z serwisu do dodawania użytkownika
         userService.addUser(userInfo);
+        // Przekierowanie użytkownika na stronę logowania po zarejestrowaniu
         return "redirect:/login";
     }
 
