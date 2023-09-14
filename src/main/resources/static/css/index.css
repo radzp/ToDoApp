@@ -10,7 +10,7 @@ body {
 
 
 .sidebar .nav-link {
-    padding: 10px 20px;
+    /*padding: 10px 20px;*/
     color: #29a781;
 }
 
@@ -81,24 +81,33 @@ body {
 /* ... (previous styles) ... */
 
 .sidebar {
+    /* Dodajemy tło i ustawiamy wysokość na 100% */
     background-color: #0e202e;
     color: #fff;
-    min-width: 180px;
-    max-width: 180px;
+    max-width: 160px;
+    min-width: 160px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
+    height: 100%; /* Nowy styl */
+    transition: max-width 0.3s ease; /* Dodajemy przejście animacji */
 }
-
 .main {
-    padding: 20px;
-    margin-left: 250px; /* Width of the sidebar */
-    transition: margin-left 0.3s ease; /* Add transition for smooth effect */
+    margin-left: 160px; /* Adjust the value as needed */
+}
+@media (max-width: 768px){
+    .additional-container{
+        margin-left: 160px;
+    }
+    .main{
+        margin-left: 160px;
+    }
 }
 
 .todo-container {
+    margin-top: 20px;
     background-color: rgba(80, 137, 167, 0.73);
     border-radius: 10px;
     padding: 20px;
@@ -106,9 +115,12 @@ body {
     min-height: calc(100vh - 40px);
     overflow-y: auto;
     width: calc(100% - 20px);
-    margin-bottom: 20px; /* Added margin at the bottom */
+
+    margin-bottom: 20px; /* Dodajemy odstęp na dole */
 }
+
 .additional-container {
+
     padding: 20px;
     color: #ffffff;
     background: transparent;
@@ -126,18 +138,6 @@ body {
     padding-top: 40px;
 }
 
-/* Adjustments for smaller screens */
-@media (max-width: 1520px) {
-
-    .main {
-        margin-left: 180px; /* Adjust the margin for the main content */
-        width: calc(100% - 180px);
-    }
-    .additional-container{
-        margin-left: 180px; /* Adjust the margin for the main content */
-        width: calc(100% - 180px);
-    }
-}
 
 .todo-item {
     border-radius: 8px;
@@ -191,7 +191,6 @@ body {
     border: none;
 }
 
-/* ... (rest of the styles) ... */
 
 .clock {
     position: relative;
@@ -288,13 +287,11 @@ body {
 
 .digital-clock {
     width: 50%;
+    scale: 120%;
     margin-top: 3%;
-    margin-left: 25%;
-    font-size: 2em;
     font-weight: bold;
-    text-align: center;
     background: #0e202e;
-
+    margin-left: 25%;
     border-radius: 25px;
     border-color: #19364f;
     border-style: solid;
