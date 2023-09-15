@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     const tasksList = document.getElementById('tasksList');
     const completedTabBtn = document.getElementById('completedTabBtn');
@@ -7,16 +8,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const newTaskInput = document.getElementById('newTask'); // New line
     const progressBar = document.getElementById('progress');
     const usernameField = document.getElementById('usernameField');
+    const authoritiesField = document.getElementById('authoritiesField'); 
+    
+    const allTasksCard = document.getElementById('allTasksNumber');
+    const activeTasksCard = document.getElementById('activeTasksNumber');
+    const completedTasksCard = document.getElementById('completedTasksNumber');
+    const progressTasksCard = document.getElementById('progressTasksNumber');
+    
     let username = null;
+    let authorities = null;
     let showCompletedTasks = null;
     let allTasksCounter = 0;
     let completedTasksCounter = 0;
-
-    allTabBtn.classList.add('tab-btn');
-    completedTabBtn.classList.add('tab-btn');
-    activeTabBtn.classList.add('tab-btn');
-
-
+    
+    
+    function updateTasksNumbers(){
+        allTasksCard.innerText = allTasksCounter;
+        activeTasksCard.innerText = (String)(allTasksCounter - completedTasksCounter);
+        completedTasksCard.innerText = completedTasksCounter;
+        if (allTasksCounter === 0) progressTasksCard.innerText = "0%";
+        else progressTasksCard.innerText = (String)(Math.round((completedTasksCounter / allTasksCounter) * 100)) + "%";
+        
+    }
+    
     async function fetchAndDisplayTasks() {
         try {
             const response = await fetch('http://localhost:8080/tasks');
@@ -44,7 +58,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
             await getUsername();
+            await getAuthorities();
             updateProgressBar();
+            updateTasksNumbers();
               
         } catch (error) {
             console.error('Wystąpił błąd:', error);
@@ -54,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function getUsername(){
         try{
-            const response = await fetch('http://localhost:8080/user/username');
+            const response = await fetch('http://localhost:8080/user/logged/username');
             if (!response.ok) {
                 console.error('Wystąpił błąd podczas pobierania danych.');
                 return;
@@ -65,6 +81,19 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Wystąpił błąd:', error);
         }
 
+    }
+    async function getAuthorities(){
+        try{
+            const response = await fetch('http://localhost:8080/user/logged/authorities');
+            if (!response.ok) {
+                console.error('Wystąpił błąd podczas pobierania danych.');
+                return;
+            }
+            const authorities = await response.json();
+            authoritiesField.innerText = authorities[0].authority;
+        }catch (error) {
+            console.error('Wystąpił błąd:', error);
+        }
     }
 
 
@@ -199,10 +228,10 @@ document.addEventListener("DOMContentLoaded", function () {
             editInput.value = textHolder
             const confirmBtn = document.createElement('button');
             confirmBtn.classList.add('confirm-btn');
-            confirmBtn.innerHTML = '<i class="fa-solid fa-check fa-beat" style="color: #20ff00;"></i>';
+            confirmBtn.innerHTML = '<i class="fa-solid fa-check fa-beat" ></i>';
             const abortBtn = document.createElement('button');
             abortBtn.classList.add('abort-btn');
-            abortBtn.innerHTML = '<i class="fa-solid fa-x fa-beat" style="color: #ff0505;"></i>';
+            abortBtn.innerHTML = '<i class="fa-solid fa-x fa-beat"></i>';
             taskItem.appendChild(editInput);
             taskItem.appendChild(confirmBtn);
             taskItem.appendChild(abortBtn);
@@ -331,3 +360,14 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchAndDisplayTasks();
       
 });
+
+function changeActiveButton(button_id){
+    var buttons = document.getElementsByClassName("tab-btn");
+    const button = document.getElementById(button_id);
+    
+    for(var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("active");
+    }
+    button.classList.add("active");
+    
+}

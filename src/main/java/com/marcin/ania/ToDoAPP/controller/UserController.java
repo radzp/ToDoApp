@@ -5,9 +5,11 @@ import com.marcin.ania.ToDoAPP.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,10 +45,17 @@ public class UserController {
     }
 
     // Endpoint do pobierania nazwy aktualnie zalogowanego użytkownika
-    @GetMapping(value = "/username")
+    @GetMapping(value = "/logged/username")
     @ResponseBody
-    public String currentUserName(Authentication authentication) {
+    public String getCurrentUserName(Authentication authentication) {
         // Pobranie nazwy użytkownika z obiektu Authentication
         return authentication.getName();
+    }
+    // Endpoint do pobierania nazwy aktualnie zalogowanego użytkownika
+    @GetMapping(value = "/logged/authorities")
+    @ResponseBody
+    public Collection<? extends GrantedAuthority> getCurrentUserAuthorities(Authentication authentication) {
+        // Pobranie nazwy użytkownika z obiektu Authentication
+        return authentication.getAuthorities();
     }
 }
