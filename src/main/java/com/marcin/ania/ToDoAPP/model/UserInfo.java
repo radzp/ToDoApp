@@ -15,7 +15,7 @@ import java.util.List;
 public class UserInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -26,12 +26,10 @@ public class UserInfo {
 
     private String roles;
 
-    public UserInfo(String username, String email, String password, String roles){
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "avatar_id", referencedColumnName = "id")
+    private ImageData avatarData;
+
     // Relacja jeden do wielu z klasą Task - jeden użytkownik może mieć wiele zadań
     @OneToMany(
             mappedBy = "userinfo", // Nazwa pola w klasie Task, które wskazuje na użytkownika
@@ -41,4 +39,12 @@ public class UserInfo {
     @JsonManagedReference // Oznacza, że ta strona relacji (UserInfo) jest właścicielem i zostanie zserializowana
     private List<Task> taskList = new ArrayList<>();
 
+
+
+    public UserInfo(String username, String email, String password, String roles){
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 }

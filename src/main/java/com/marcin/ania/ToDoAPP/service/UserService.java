@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,11 +31,17 @@ public class UserService implements UserDetailsService {
      * @throws UsernameNotFoundException Jeśli użytkownik o podanej nazwie nie zostanie znaleziony.
      */
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserInfo> user = userRepository.findByUsername(username);
 
         // Sprawdza, czy użytkownik o podanej nazwie istnieje
         return user.map(UserUserDetails::new).orElseThrow(() -> new UsernameNotFoundException("User not found " + user));
+    }
+
+    @Transactional
+    public Optional<UserInfo> findByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
     /**

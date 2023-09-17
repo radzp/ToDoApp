@@ -8,8 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const newTaskInput = document.getElementById('newTask'); // New line
     const progressBar = document.getElementById('progress');
     const usernameField = document.getElementById('usernameField');
-    const authoritiesField = document.getElementById('authoritiesField'); 
-    
+    const authoritiesField = document.getElementById('authoritiesField');
+    const avatarImage = document.getElementById('avatarImage');
+
     const allTasksCard = document.getElementById('allTasksNumber');
     const activeTasksCard = document.getElementById('activeTasksNumber');
     const completedTasksCard = document.getElementById('completedTasksNumber');
@@ -59,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             await getUsername();
             await getAuthorities();
+            await getUserAvatar();
             updateProgressBar();
             updateTasksNumbers();
               
@@ -82,6 +84,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     }
+
+    async function getUserAvatar(){
+        try{
+            const response = await fetch('http://localhost:8080/user/logged/avatar');
+            if (!response.ok) {
+                console.error('Wystąpił błąd podczas pobierania danych.');
+                return;
+            }
+            const blob = await response.blob();
+            avatarImage.src = URL.createObjectURL(blob);
+            //The URL.createObjectURL() static method creates a string containing a URL
+            // representing the object given in the parameter
+
+        }catch (error) {
+            console.error('Wystąpił błąd:', error);
+        }
+    }
+
     async function getAuthorities(){
         try{
             const response = await fetch('http://localhost:8080/user/logged/authorities');

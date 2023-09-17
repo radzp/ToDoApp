@@ -7,6 +7,7 @@ import com.marcin.ania.ToDoAPP.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 
@@ -76,6 +77,7 @@ public class TaskService {
      * @param username     Nazwa użytkownika, do którego przypisane będzie zadanie.
      * @return Zadanie zostało zapisane w bazie danych.
      */
+    @Transactional
     public Task save(String description, Boolean is_completed, String username) {
         Task task = new Task();
         task.setDescription(description);

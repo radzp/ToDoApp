@@ -5,6 +5,7 @@ import com.marcin.ania.ToDoAPP.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -49,6 +50,7 @@ public class TaskController {
 
     // Dodanie nowego zadania przypisanego do zalogowanego użytkownika
     @PostMapping("")
+    @Transactional
     public Task create(@RequestBody Task newTask) {
         String loggedInUsername = SecurityContextHolder.getContext().getAuthentication().getName();
         return taskService.save(newTask.getDescription(), newTask.getIs_completed(), loggedInUsername);
