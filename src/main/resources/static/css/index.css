@@ -66,16 +66,6 @@
     background: transparent;
     border: none;
 }
-.sidebar-menu button,
-.sidebar-menu a {
-    width: 100%;
-    display: flex;
-    padding-left: 1rem;
-    color: var(--text-color);
-    font-size: 1.1rem;
-    background: transparent;
-    border: none;
-}
 
 .sidebar-menu button.active,
 .sidebar-menu a.active {
@@ -568,7 +558,8 @@ h6.progress-info {
 }
 
 .tab-btn:hover{
-    scale: 110%;
+    scale: 107%;
+    width: 96.7%;
 }
 
 .completed {
