@@ -1,6 +1,7 @@
 package com.marcin.ania.ToDoAPP.controller;
 
 import com.marcin.ania.ToDoAPP.model.ImageData;
+import com.marcin.ania.ToDoAPP.model.Task;
 import com.marcin.ania.ToDoAPP.model.UserInfo;
 import com.marcin.ania.ToDoAPP.service.UserService;
 import com.marcin.ania.ToDoAPP.util.ImageUtils;
@@ -77,5 +78,10 @@ public class UserController {
             }
             else return ResponseEntity.notFound().build();
         } else return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}")
+    public UserInfo editUserById(@PathVariable Long id, @RequestBody UserInfo newUser){
+        return userService.updateUser(id, newUser);
     }
 }

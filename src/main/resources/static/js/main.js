@@ -389,5 +389,13 @@ function changeActiveButton(button_id){
         buttons[i].classList.remove("active");
     }
     button.classList.add("active");
-    
+}
+function changeActiveTaskSortingButton(button_id){
+    var buttons = document.getElementsByClassName("sortButton");
+    const button = document.getElementById(button_id);
+
+    for(var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("active");
+    }
+    button.classList.add("active");
 }

@@ -23,16 +23,8 @@
     <div class="sidebar-menu">
         <ul>
             <li>
-                <button id="allTabBtn" onclick="changeActiveButton(this.id)" class="active tab-btn"><span><i class="fa-solid fa-list-check"></i></span>
-                    <span>All tasks</span></button>
-            </li>
-            <li>
-                <button id="activeTabBtn" onclick="changeActiveButton(this.id)" class="tab-btn"><span><i class="fa-regular fa-square"></i></span>
-                    <span>Active</span></button>
-            </li>
-            <li>
-                <button id="completedTabBtn" onclick="changeActiveButton(this.id)" class="tab-btn"><span><i class="fa-regular fa-square-check"></i></span><span>Completed</span>
-                </button>
+                <a href="index.html" class="tab-btn active" ><span><i class="las la-home"></i></span><span>Dashboard</span>
+                </a>
             </li>
             <li>
                 <button id="settingsTabBtn" onclick="changeActiveButton(this.id)" class="tab-btn"><span><i class="fas fa-cogs"></i></span><span>Settings</span></button>
@@ -120,8 +112,14 @@
                     <div class="card-header">
                         <h3>Your todo's</h3>
 
-                        <button>See all <span class="las la-arrow-right">
-                            </span></button>
+                        <div class="sortButtons">
+                            <button id="allTabBtn" class="sortButton active" onclick="changeActiveTaskSortingButton(this.id)"><span><i class="fa-solid fa-list-check"></i></span>
+                                <span>All tasks</span></button>
+                            <button id="activeTabBtn" class="sortButton" onclick="changeActiveTaskSortingButton(this.id)"><span><i class="fa-regular fa-square"></i></span>
+                                <span>Active</span></button>
+                            <button id="completedTabBtn" class="sortButton" onclick="changeActiveTaskSortingButton(this.id)"><span><i class="fa-regular fa-square-check"></i></span><span>Completed</span>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="card-body">
