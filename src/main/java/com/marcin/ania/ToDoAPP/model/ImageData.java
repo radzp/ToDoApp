@@ -1,5 +1,6 @@
 package com.marcin.ania.ToDoAPP.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,5 +27,6 @@ public class ImageData {
     private byte[] imageData;
 
     @OneToOne(mappedBy = "avatarData", fetch = FetchType.LAZY, optional = false)
+    @JsonBackReference
     private UserInfo userinfo;
 }

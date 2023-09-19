@@ -28,6 +28,7 @@ public class UserInfo {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")
+    @JsonManagedReference
     private ImageData avatarData;
 
     // Relacja jeden do wielu z klasą Task - jeden użytkownik może mieć wiele zadań
