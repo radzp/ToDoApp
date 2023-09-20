@@ -27,7 +27,9 @@
                 </a>
             </li>
             <li>
-                <button id="settingsTabBtn" onclick="changeActiveButton(this.id)" class="tab-btn"><span><i class="fas fa-cogs"></i></span><span>Settings</span></button>
+                <a id="settingsTabBtn " th:href="@{/settings}" class="tab-btn">
+                    <span><i class="fas fa-cogs"></i></span><span>Settings</span>
+                </a>
             </li>
             <li>
                 <a class="tab-btn" th:href="@{/logout}"><span><i class="fas fa-sign-out-alt"></i></span><span>Logout</span>
@@ -53,7 +55,7 @@
         </div>
 
         <div class="user-wrapper">
-            <img id="avatarImage" src="" width="40px" height="40px" alt="">
+            <img id="avatarImage" class="avatarImage" src="" width="40px" height="40px" alt="">
             <div>
                 <h4 id="usernameField">Unknown</h4>
                 <small id="authoritiesField">none</small>

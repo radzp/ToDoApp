@@ -1,7 +1,5 @@
 package com.marcin.ania.ToDoAPP.controller;
 
-import com.marcin.ania.ToDoAPP.model.ImageData;
-import com.marcin.ania.ToDoAPP.model.Task;
 import com.marcin.ania.ToDoAPP.model.UserInfo;
 import com.marcin.ania.ToDoAPP.service.UserService;
 import com.marcin.ania.ToDoAPP.util.ImageUtils;
@@ -13,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
@@ -65,20 +64,6 @@ public class UserController {
         return authentication.getAuthorities();
     }
 
-    @Transactional
-    @GetMapping("/logged/avatar")
-    public ResponseEntity<byte[]> getCurrentUserAvatar(Authentication authentication){
-        String username = authentication.getName();
-        Optional<UserInfo> userInfo = userService.findByUsername(username);
-        if (userInfo.isPresent()) {
-            UserInfo presentUserInfo = userInfo.get();
-            byte[] imageData = ImageUtils.decompressImage(presentUserInfo.getAvatarData().getImageData());
-            if (imageData != null) {
-                return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageData);
-            }
-            else return ResponseEntity.notFound().build();
-        } else return ResponseEntity.notFound().build();
-    }
 
     @PutMapping("/{id}")
     public UserInfo editUserById(@PathVariable Long id, @RequestBody UserInfo newUser){

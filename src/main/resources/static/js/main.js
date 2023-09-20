@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const progressBar = document.getElementById('progress');
     const usernameField = document.getElementById('usernameField');
     const authoritiesField = document.getElementById('authoritiesField');
-    const avatarImage = document.getElementById('avatarImage');
+    
+    const avatarImage = document.getElementsByClassName('avatarImage');
 
     const allTasksCard = document.getElementById('allTasksNumber');
     const activeTasksCard = document.getElementById('activeTasksNumber');
@@ -17,21 +18,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const progressTasksCard = document.getElementById('progressTasksNumber');
     
     let username = null;
-    let authorities = null;
     let showCompletedTasks = null;
     let allTasksCounter = 0;
     let completedTasksCounter = 0;
-    
-    
+
+
     function updateTasksNumbers(){
         allTasksCard.innerText = allTasksCounter;
         activeTasksCard.innerText = (String)(allTasksCounter - completedTasksCounter);
         completedTasksCard.innerText = completedTasksCounter;
         if (allTasksCounter === 0) progressTasksCard.innerText = "0%";
         else progressTasksCard.innerText = (String)(Math.round((completedTasksCounter / allTasksCounter) * 100)) + "%";
-        
+
     }
-    
+
     async function fetchAndDisplayTasks() {
         try {
             const response = await fetch('http://localhost:8080/tasks');
@@ -58,16 +58,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     tasksList.appendChild(taskItem);
                 }
             });
-            await getUsername();
-            await getAuthorities();
-            await getUserAvatar();
+
             updateProgressBar();
             updateTasksNumbers();
-              
+
         } catch (error) {
             console.error('Wystąpił błąd:', error);
         }
-         
+
     }
 
     async function getUsername(){
@@ -78,7 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
             username = await response.text();
-            usernameField.innerText = username;
+            if (username == null) usernameField.innerText = "usernameNull"
+            else usernameField.innerText = username;
         }catch (error) {
             console.error('Wystąpił błąd:', error);
         }
@@ -93,7 +92,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
             const blob = await response.blob();
-            avatarImage.src = URL.createObjectURL(blob);
+            for (let i = 0; i < avatarImage.length; i++) {
+                avatarImage.item(i).src = URL.createObjectURL(blob);
+            }
             //The URL.createObjectURL() static method creates a string containing a URL
             // representing the object given in the parameter
 
@@ -130,11 +131,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             await fetchAndDisplayTasks(); // Aktualizacja listy po usunięciu zadania
-              
+
         } catch (error) {
             console.error('Wystąpił błąd:', error);
         }
-         
+
     }
 
 
@@ -161,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             await fetchAndDisplayTasks();
-              
+
 
         } catch(error){
             console.error('Wystąpił błąd:', error);
@@ -188,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-    
+
     function changeToInputBtns(taskItem, editInput, confirmBtn, abortBtn, statusBtn, taskText, deleteBtn, editBtn){
         taskItem.removeChild(editInput);
         taskItem.removeChild(confirmBtn);
@@ -233,10 +234,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         statusBtn.addEventListener('click', () => {
             statusTask(task);
-              
+
             toggleTaskCompletion(taskItem, task);
         });
-        
+
         editBtn.addEventListener('click', () => {
             const textHolder = taskText.textContent.trim();
             taskItem.removeChild(statusBtn);
@@ -297,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return taskItem;
     }
-    
+
     function toggleTaskCompletion(taskItem, task) {
         task.completed = !task.completed;
 
@@ -323,29 +324,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 taskItem.querySelector('.task-text').classList.remove('completed');
             }
         }
-         
+
     }
 
 
     completedTabBtn.addEventListener('click', () => {
         showCompletedTasks = true;
         fetchAndDisplayTasks();
-          
-         
+
+
     });
 
     activeTabBtn.addEventListener('click', () => {
         showCompletedTasks = false;
         fetchAndDisplayTasks();
-          
-         
+
+
     });
 
     allTabBtn.addEventListener('click', () => {
         showCompletedTasks = null;
         fetchAndDisplayTasks();
-          
-         
+
+
     });
 
     addButton.addEventListener('click', async () => {
@@ -370,7 +371,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 newTaskInput.value = '';
                 await fetchAndDisplayTasks();
-                  
+
             } catch (error) {
                 console.error('Wystąpił błąd:', error);
             }
@@ -378,6 +379,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     fetchAndDisplayTasks();
+    getUsername();
+    getAuthorities();
+    getUserAvatar();
+
       
 });
 

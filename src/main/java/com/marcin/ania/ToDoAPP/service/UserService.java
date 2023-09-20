@@ -1,8 +1,10 @@
 package com.marcin.ania.ToDoAPP.service;
 
 import com.marcin.ania.ToDoAPP.config.UserUserDetails;
+import com.marcin.ania.ToDoAPP.model.ImageData;
 import com.marcin.ania.ToDoAPP.model.UserInfo;
 import com.marcin.ania.ToDoAPP.repository.UserRepository;
+import com.marcin.ania.ToDoAPP.util.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,7 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +44,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public Optional<UserInfo> findByUsername(String username){
+    public Optional<UserInfo> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -50,7 +54,7 @@ public class UserService implements UserDetailsService {
      * @param userInfo Informacje o nowym użytkowniku.
      * @return Komunikat potwierdzający zapisanie użytkownika.
      */
-    public String addUser(UserInfo userInfo){
+    public String addUser(UserInfo userInfo) {
         // Szyfruje hasło przed zapisaniem w bazie danych
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
         // Zapisuje użytkownika w repozytorium
@@ -92,6 +96,7 @@ public class UserService implements UserDetailsService {
             existingUser.setPassword(userInfo.getPassword());
             existingUser.setRoles(userInfo.getRoles());
             existingUser.setEmail(userInfo.getEmail());
+            existingUser.setAvatarData(userInfo.getAvatarData());
             return userRepository.save(existingUser);
         }
         return null;
@@ -113,4 +118,20 @@ public class UserService implements UserDetailsService {
         userRepository.deleteById(id);
     }
 
+    public void updateUserAvatar(Long id, MultipartFile file) {
+
+        Optional<UserInfo> userInfo = userRepository.findById(id);
+        if (userInfo.isPresent()) {
+            UserInfo presentUserInfo = userInfo.get();
+            try {
+                ImageData imageData = ImageData.builder().name(file.getOriginalFilename())
+                        .type(file.getContentType())
+                        .imageData(ImageUtils.compressImage(file.getBytes())).build();
+                presentUserInfo.setAvatarData(imageData);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+    }
 }

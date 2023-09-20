@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(mvc.pattern("/static/**")).permitAll()
                         .requestMatchers(mvc.pattern("/")).authenticated()
+                        .requestMatchers(mvc.pattern("/settings")).authenticated()
                         .requestMatchers(mvc.pattern("/tasks/**")).permitAll()
                         .requestMatchers(mvc.pattern("/tasks")).permitAll()
                         .requestMatchers(mvc.pattern("/**"), mvc.pattern("/user/new")).permitAll()

@@ -1,0 +1,46 @@
+.recent-grid {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 50% auto;
+}
+.avatarWrapper {
+    padding: 30px;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+.settingsButton {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 17px;
+}
+.button{
+    background: var(--main-color);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: .8rem;
+    padding: .5rem 1rem;
+    margin-left: 6px;
+    border: 1px solid var(--main-color);
+
+}
+.button:hover{
+    background-color: var(--progress-bar);
+    scale: 103%;
+    border-color: var(--progress-bar);
+}
+.button::-webkit-file-upload-button{
+    background-color: #bdbdc0;
+    color: var(--text-black);
+    border-radius: 10px;
+    border: none;
+    cursor:pointer;
+    margin-right: 10px;
+}
+.card-body h4{
+
+}
