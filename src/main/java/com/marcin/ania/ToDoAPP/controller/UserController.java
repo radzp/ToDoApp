@@ -1,26 +1,18 @@
 package com.marcin.ania.ToDoAPP.controller;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import com.marcin.ania.ToDoAPP.model.UserInfo;
 import com.marcin.ania.ToDoAPP.service.UserService;
-import com.marcin.ania.ToDoAPP.util.ImageUtils;
-import org.hibernate.annotations.DialectOverride;
-import org.hibernate.mapping.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -32,14 +24,14 @@ public class UserController {
 
     // Endpoint do dodawania nowego użytkownika
     @PostMapping("/new")
-    public String addNewUser(@RequestBody UserInfo userInfo){
+    public String addNewUser(@RequestBody UserInfo userInfo) {
         // Wywołanie metody z serwisu do dodawania użytkownika i zwrócenie wyniku
         return userService.addUser(userInfo);
     }
 
     // Endpoint do pobierania listy wszystkich użytkowników
     @GetMapping("/all")
-    public List<UserInfo> getAll(){
+    public List<UserInfo> getAll() {
         // Wywołanie metody z serwisu do pobierania wszystkich użytkowników
         return userService.getAllUsers();
     }
@@ -61,6 +53,7 @@ public class UserController {
         // Pobranie nazwy użytkownika z obiektu Authentication
         return authentication.getName();
     }
+
     // Endpoint do pobierania nazwy aktualnie zalogowanego użytkownika
     @GetMapping(value = "/logged/authorities")
     @ResponseBody
@@ -69,8 +62,29 @@ public class UserController {
         return authentication.getAuthorities();
     }
 
+    @PutMapping(value = "/logged/changePassword")
+    public ResponseEntity<String> changeCurrentUserPassword(@RequestParam("oldPassword") String oldPassword,
+                                                            @RequestParam("newPassword") String newPassword,
+                                                            Authentication authentication) {
+        String username = authentication.getName();
+        Optional<UserInfo> userInfo = userService.findByUsername(username);
+
+        if (userInfo.isPresent()) {
+            Long userId = userInfo.get().getId();
+            boolean isChanged = userService.updateUserPassword(userId, oldPassword, newPassword);
+
+            if (isChanged) {
+                return ResponseEntity.ok("Password changed successfully!");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to change password. Please check your old password.");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        }
+    }
+
     @PutMapping("/{id}")
-    public UserInfo editUserById(@PathVariable Long id, @RequestBody UserInfo newUser){
+    public UserInfo editUserById(@PathVariable Long id, @RequestBody UserInfo newUser) {
         return userService.updateUser(id, newUser);
     }
 }

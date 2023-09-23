@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function checkPassword(){
 
-    const oldPassword = document.getElementById("oldPassword");
-    const newPassword = document.getElementById("newPassword");
-    const repeatPassword = document.getElementById("repeatPassword");
+    const oldPassword = document.getElementById("oldPassword").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const repeatPassword = document.getElementById("repeatPassword").value;
 
     const errorMessage = document.getElementById("passwordMatchError");
     const successfulMessage = document.getElementById("passwordSuccessful");
@@ -73,23 +73,20 @@ async function checkPassword(){
     successfulMessage.innerText = "";
 
 
-    if (newPassword.value !== repeatPassword.value){
+    if (newPassword !== repeatPassword){
         errorMessage.innerText = "New password doesn't match the repeated password!";
     }
     else {
         try{
-            const response = await fetch(`http://localhost:8080/user/logged/changePassword`, {
+            const response = await fetch(`http://localhost:8080/user/logged/changePassword?oldPassword=${oldPassword}&newPassword=${newPassword}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    "oldPassword": oldPassword.value,
-                    "newPassword": newPassword.value
-                })
             });
 
             if (!response.ok) {
+                errorMessage.innerText = "Old password doesn't match!";
                 console.error('Wystąpił błąd podczas pobierania danych.');
             } else{
                 successfulMessage.innerText = "Your password changed successfully!";

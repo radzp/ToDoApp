@@ -134,4 +134,18 @@ public class UserService implements UserDetailsService {
 
         }
     }
+
+    public boolean updateUserPassword (Long id, String oldPassword, String newPassword){
+        Optional<UserInfo> userInfo = userRepository.findById(id);
+        if (userInfo.isPresent()) {
+            UserInfo presentUserInfo = userInfo.get();
+            if (passwordEncoder.matches(oldPassword,presentUserInfo.getPassword())){
+                presentUserInfo.setPassword(passwordEncoder.encode(newPassword));
+                userRepository.save(presentUserInfo);
+                return true;
+            }
+        }
+        // jezeli cos pojdzie nie tak to zwraca to
+        return false;
+    }
 }

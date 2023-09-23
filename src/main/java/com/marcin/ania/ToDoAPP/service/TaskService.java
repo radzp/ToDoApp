@@ -62,7 +62,6 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-
     /**
      * 1.Tworzy nowy obiekt zadania Task.
      * 2.Ustawia opis i stan ukończenia tego zadania na podstawie przekazanych argumentów description i is_completed.
