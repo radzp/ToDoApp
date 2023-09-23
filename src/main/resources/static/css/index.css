@@ -438,11 +438,6 @@ main {
 
 }
 
-
-
-
-
-
 .todo-container h2 {
     color: var(--text-color);
 }
@@ -596,3 +591,6 @@ h6.progress-info {
     width: 98%;
     font-size: 1.04rem;
 }
+
+
+

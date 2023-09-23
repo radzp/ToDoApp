@@ -1,8 +1,12 @@
 package com.marcin.ania.ToDoAPP.controller;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.marcin.ania.ToDoAPP.model.UserInfo;
 import com.marcin.ania.ToDoAPP.service.UserService;
 import com.marcin.ania.ToDoAPP.util.ImageUtils;
+import org.hibernate.annotations.DialectOverride;
+import org.hibernate.mapping.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -23,7 +28,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     // Endpoint do dodawania nowego użytkownika
     @PostMapping("/new")
@@ -63,7 +68,6 @@ public class UserController {
         // Pobranie nazwy użytkownika z obiektu Authentication
         return authentication.getAuthorities();
     }
-
 
     @PutMapping("/{id}")
     public UserInfo editUserById(@PathVariable Long id, @RequestBody UserInfo newUser){

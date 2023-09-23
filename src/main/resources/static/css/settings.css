@@ -18,7 +18,7 @@
     justify-content: center;
     padding-bottom: 17px;
 }
-.button{
+.button {
     background: var(--main-color);
     border-radius: 10px;
     color: var(--text-color);
@@ -28,12 +28,12 @@
     border: 1px solid var(--main-color);
 
 }
-.button:hover{
+.button:hover {
     background-color: var(--progress-bar);
     scale: 103%;
     border-color: var(--progress-bar);
 }
-.button::-webkit-file-upload-button{
+.button::-webkit-file-upload-button {
     background-color: #bdbdc0;
     color: var(--text-black);
     border-radius: 10px;
@@ -41,6 +41,71 @@
     cursor:pointer;
     margin-right: 10px;
 }
-.card-body h4{
 
+.passwordField {
+    display: flex;
+    flex-direction: column;
+    margin-left: 45px;
+    margin-right: 45px;
+    margin-bottom: 40px;
 }
+
+.passwordField:last-child {
+    padding-bottom: 30px;
+}
+
+.first {
+    margin-top: 30px;
+}
+
+.passwordField input {
+    font-size: 1.2rem;
+}
+
+#previewImage {
+    width: 400px;
+    height: 400px;
+}
+
+.card {
+    height: 100%;
+}
+
+.card-body h4 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.errorMessage,
+.successfulMessage{
+    display: flex;
+    margin-left: 45px;
+    margin-right: 45px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding-left: 14px;
+}
+
+.errorMessage{
+    color: #9f363f;
+    background: #f3dcdd;
+}
+.successfulMessage{
+    color: #419f36;
+    background: #e0f3dc;
+}
+
+@media only screen and (max-width: 960px) {
+    .recent-grid {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .recent-grid {
+        grid-template-columns: 100%;
+    }
+}
+
+
+

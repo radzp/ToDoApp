@@ -58,3 +58,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
+
+
+async function checkPassword(){
+
+    const oldPassword = document.getElementById("oldPassword");
+    const newPassword = document.getElementById("newPassword");
+    const repeatPassword = document.getElementById("repeatPassword");
+
+    const errorMessage = document.getElementById("passwordMatchError");
+    const successfulMessage = document.getElementById("passwordSuccessful");
+
+    errorMessage.innerText = "";
+    successfulMessage.innerText = "";
+
+
+    if (newPassword.value !== repeatPassword.value){
+        errorMessage.innerText = "New password doesn't match the repeated password!";
+    }
+    else {
+        try{
+            const response = await fetch(`http://localhost:8080/user/logged/changePassword`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "oldPassword": oldPassword.value,
+                    "newPassword": newPassword.value
+                })
+            });
+
+            if (!response.ok) {
+                console.error('Wystąpił błąd podczas pobierania danych.');
+            } else{
+                successfulMessage.innerText = "Your password changed successfully!";
+            }
+
+        }catch (e) {
+            console.error('Wystąpił błąd:', e);
+        }
+
+    }
+
+}

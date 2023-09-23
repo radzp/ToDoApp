@@ -5,17 +5,18 @@ import com.marcin.ania.ToDoAPP.model.UserInfo;
 import com.marcin.ania.ToDoAPP.service.UserService;
 import com.marcin.ania.ToDoAPP.util.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-@Controller
+@RestController
 public class RegistrationController {
 
     @Autowired
@@ -24,16 +25,16 @@ public class RegistrationController {
 
     // Metoda obsługująca GET request na endpoint /register
     @GetMapping("/register")
-    public String showRegistrationForm(Model model){
+    public RedirectView showRegistrationForm(Model model){
         // Dodanie nowego obiektu UserInfo do modelu, który będzie wykorzystywany w formularzu rejestracji
         model.addAttribute("UserInfo", new UserInfo());
         // Zwrócenie widoku "login", który zawiera formularz rejestracji
-        return "login";
+        return new RedirectView("login");
     }
 
     // Metoda obsługująca POST request na endpoint /register
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("UserInfo") UserInfo userInfo){
+    public RedirectView registerUser(@ModelAttribute("UserInfo") UserInfo userInfo){
         // Ustawienie roli użytkownika jako "USER"
         userInfo.setRoles("USER");
 
@@ -52,7 +53,7 @@ public class RegistrationController {
         // Wywołanie metody z serwisu do dodawania użytkownika
         userService.addUser(userInfo);
         // Przekierowanie użytkownika na stronę logowania po zarejestrowaniu
-        return "redirect:/login";
+        return new RedirectView("login");
     }
 
 }

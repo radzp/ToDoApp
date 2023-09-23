@@ -12,11 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Optional;
 
-@Controller
+@RestController
 @Transactional
 public class ImageController {
 
@@ -38,13 +40,13 @@ public class ImageController {
     }
 
     @PutMapping("/user/logged/avatar")
-    public String changeCurrentUserAvatar(Authentication authentication, @RequestParam("image") MultipartFile file){
+    public RedirectView changeCurrentUserAvatar(Authentication authentication, @RequestParam("image") MultipartFile file){
         String username = authentication.getName();
         Optional<UserInfo> existingUserInfo = userService.findByUsername(username);
         if (existingUserInfo.isPresent()) {
             UserInfo presentUserInfo = existingUserInfo.get();
             userService.updateUserAvatar(presentUserInfo.getId(), file);
         }
-        return "redirect:/settings";
+        return new RedirectView("/settings");
     }
 }
