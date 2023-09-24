@@ -30,14 +30,14 @@ public class UserService implements UserDetailsService {
     /**
      * Metoda wymagana do implementacji interfejsu UserDetailsService, używana do logowania użytkownika.
      *
-     * @param username Nazwa użytkownika.
+     * @param email email użytkownika.
      * @return Obiekt UserDetails, który reprezentuje użytkownika w systemie.
      * @throws UsernameNotFoundException Jeśli użytkownik o podanej nazwie nie zostanie znaleziony.
      */
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserInfo> user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<UserInfo> user = userRepository.findByEmail(email);
 
         // Sprawdza, czy użytkownik o podanej nazwie istnieje
         return user.map(UserUserDetails::new).orElseThrow(() -> new UsernameNotFoundException("User not found " + user));

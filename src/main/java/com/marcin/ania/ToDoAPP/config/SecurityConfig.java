@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/")
+                        .usernameParameter("email")
                         .permitAll()
                 )
                 // Konfiguracja wylogowania
