@@ -46,6 +46,13 @@ public class UserController {
         return userInfo;
     }
 
+
+    @PutMapping("/{id}")
+    public UserInfo editUserById(@PathVariable Long id, @RequestBody UserInfo newUser) {
+        return userService.updateUser(id, newUser);
+    }
+
+
     // Endpoint do pobierania nazwy aktualnie zalogowanego użytkownika
     @GetMapping(value = "/logged/username")
     @ResponseBody
@@ -83,8 +90,30 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}")
-    public UserInfo editUserById(@PathVariable Long id, @RequestBody UserInfo newUser) {
-        return userService.updateUser(id, newUser);
-    }
+    @PutMapping("/logged/changeUsername")
+    public ResponseEntity<String> changeCurrentUserUsername(@RequestParam("oldUsername") String oldUsername,
+                                                            @RequestParam("newUsername") String newUsername,
+                                                            Authentication authentication) {
+        String username = authentication.getName();
+        Optional<UserInfo> userInfo = userService.findByUsername(username);
+
+        if(userInfo.isPresent()){
+            Long userId = userInfo.get().getId();
+            boolean isChanged = userService.updateUserUsername(userId, oldUsername, newUsername);
+
+            if (isChanged) {
+                return ResponseEntity.ok("Username changed successfully!");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to change username. Please check your old username.");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        }
+
+        }
 }
+
+
+
+
+

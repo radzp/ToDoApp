@@ -119,8 +119,10 @@
 
 
                         <div class="settingsButton">
+
                             <button class="button" id="passwordButton" onclick="checkPassword()">Change password
                             </button>
+
                         </div>
 
                     </div>
@@ -134,7 +136,31 @@
                     </div>
 
                     <div class="card-body">
-                        dwadwadwadwa
+                        <h4>You can change your username here.</h4>
+                        <div class="usernameField first">
+                            <label for="oldUsername">Type your old username: </label>
+                            <input id="oldUsername" type="text" placeholder="Old username">
+                        </div>
+
+                        <div class="usernameField">
+                            <label for="newUsername">Type your new username: </label>
+                            <input id="newUsername" type="text" placeholder="New username">
+                        </div>
+
+                        <div class="errorMessage">
+                            <p id="usernameMatchError"></p>
+                        </div>
+                        <div class="successfulMessage">
+                            <p id="usernameSuccessful"></p>
+                        </div>
+
+
+                        <div class="settingsButton">
+
+                            <button class="button" id="usernameButton" onclick="checkUsername()">Change username</button>
+
+                        </div>
+
                     </div>
                 </div>
             </div>

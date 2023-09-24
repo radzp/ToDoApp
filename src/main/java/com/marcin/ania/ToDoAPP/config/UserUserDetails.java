@@ -2,6 +2,7 @@ package com.marcin.ania.ToDoAPP.config;
 
 
 import com.marcin.ania.ToDoAPP.model.UserInfo;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,12 +18,16 @@ public class UserUserDetails implements UserDetails {
 
     private String username;  // Przechowuje nazwę użytkownika
     private String password;  // Przechowuje hasło użytkownika
+    // Zwraca nazwę użytkownika
+    @Getter
+    private String email;
     private List<GrantedAuthority> authorities;  // Przechowuje role użytkownika
 
     // Konstruktor, który konwertuje obiekt UserInfo na obiekt UserDetails
     public UserUserDetails(UserInfo userInfo) {
         username = userInfo.getUsername();  // Ustawia nazwę użytkownika
         password = userInfo.getPassword();  // Ustawia hasło użytkownika
+        email = userInfo.getEmail();  // Ustawia hasło użytkownika
 
         // Konwertuje role zapisane jako string do obiektów GrantedAuthority i przechowuje w liście
         authorities = Arrays.stream(userInfo.getRoles().split(","))

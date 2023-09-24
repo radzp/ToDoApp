@@ -42,7 +42,8 @@
     margin-right: 10px;
 }
 
-.passwordField {
+.passwordField ,
+.usernameField {
     display: flex;
     flex-direction: column;
     margin-left: 45px;
@@ -50,7 +51,8 @@
     margin-bottom: 40px;
 }
 
-.passwordField:last-child {
+.passwordField:last-child,
+.usernameField:last-child {
     padding-bottom: 30px;
 }
 
@@ -58,7 +60,8 @@
     margin-top: 30px;
 }
 
-.passwordField input {
+.passwordField input,
+.usernameField input {
     font-size: 1.2rem;
 }
 
@@ -94,6 +97,9 @@
     color: #419f36;
     background: #e0f3dc;
 }
+
+
+
 
 @media only screen and (max-width: 960px) {
     .recent-grid {

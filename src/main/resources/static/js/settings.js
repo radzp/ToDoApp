@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const avatarImage = document.getElementsByClassName('avatarImage');
     let username = null;
 
-    async function getUsername(){
-        try{
+    async function getUsername() {
+        try {
             const response = await fetch('http://localhost:8080/user/logged/username');
             if (!response.ok) {
                 console.error('Wystąpił błąd podczas pobierania danych.');
@@ -15,13 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
             username = await response.text();
             if (username == null) usernameField.innerText = "usernameNull"
             else usernameField.innerText = username;
-        }catch (error) {
+        } catch (error) {
             console.error('Wystąpił błąd:', error);
         }
 
     }
-    async function getUserAvatar(){
-        try{
+
+    async function getUserAvatar() {
+        try {
             const response = await fetch('http://localhost:8080/user/logged/avatar');
             if (!response.ok) {
                 console.error('Wystąpił błąd podczas pobierania danych.');
@@ -34,12 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
             //The URL.createObjectURL() static method creates a string containing a URL
             // representing the object given in the parameter
 
-        }catch (error) {
+        } catch (error) {
             console.error('Wystąpił błąd:', error);
         }
     }
-    async function getAuthorities(){
-        try{
+
+    async function getAuthorities() {
+        try {
             const response = await fetch('http://localhost:8080/user/logged/authorities');
             if (!response.ok) {
                 console.error('Wystąpił błąd podczas pobierania danych.');
@@ -47,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             const authorities = await response.json();
             authoritiesField.innerText = authorities[0].authority;
-        }catch (error) {
+        } catch (error) {
             console.error('Wystąpił błąd:', error);
         }
     }
@@ -60,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-async function checkPassword(){
+async function checkPassword() {
 
     const oldPassword = document.getElementById("oldPassword").value;
     const newPassword = document.getElementById("newPassword").value;
@@ -73,11 +75,10 @@ async function checkPassword(){
     successfulMessage.innerText = "";
 
 
-    if (newPassword !== repeatPassword){
+    if (newPassword !== repeatPassword) {
         errorMessage.innerText = "New password doesn't match the repeated password!";
-    }
-    else {
-        try{
+    } else {
+        try {
             const response = await fetch(`http://localhost:8080/user/logged/changePassword?oldPassword=${oldPassword}&newPassword=${newPassword}`, {
                 method: 'PUT',
                 headers: {
@@ -88,14 +89,66 @@ async function checkPassword(){
             if (!response.ok) {
                 errorMessage.innerText = "Old password doesn't match!";
                 console.error('Wystąpił błąd podczas pobierania danych.');
-            } else{
-                successfulMessage.innerText = "Your password changed successfully!";
+            } else {
+                successfulMessage.innerText = "Your password changed successfully! We will redirect you to a logging page now.";
             }
 
-        }catch (e) {
+        } catch (e) {
+            console.error('Wystąpił błąd:', e);
+        }
+        //logout after change
+        try{
+            await fetch(`http://localhost:8080/logout`);
+        } catch (e){
             console.error('Wystąpił błąd:', e);
         }
 
+        await new Promise(r => setTimeout(r,4500));
+        window.location.href="/login";
+
+    }
+}
+
+async function checkUsername() {
+
+    const oldUsername = document.getElementById("oldUsername").value;
+    const newUsername = document.getElementById("newUsername").value;
+
+    const errorMessage = document.getElementById("usernameMatchError");
+    const successfulMessage = document.getElementById("usernameSuccessful");
+
+
+    errorMessage.innerText = "";
+    successfulMessage.innerText = "";
+
+
+    try {
+        const response = await fetch(`http://localhost:8080/user/logged/changeUsername?oldUsername=${oldUsername}&newUsername=${newUsername}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (!response.ok) {
+            errorMessage.innerText = "Old username doesn't match!";
+            console.error('Wystąpił błąd podczas pobierania danych.');
+        } else {
+            successfulMessage.innerText = "Your username changed successfully! We will redirect you to a logging page now.";
+        }
+
+    } catch (e) {
+        console.error('Wystąpił błąd:', e);
     }
 
+
+    //logout after change
+    try{
+        await fetch(`http://localhost:8080/logout`);
+    } catch (e){
+        console.error('Wystąpił błąd:', e);
+    }
+
+    await new Promise(r => setTimeout(r,4500));
+    window.location.href="/login";
 }

@@ -6,6 +6,7 @@ import com.marcin.ania.ToDoAPP.model.UserInfo;
 import com.marcin.ania.ToDoAPP.repository.UserRepository;
 import com.marcin.ania.ToDoAPP.util.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -135,11 +136,11 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public boolean updateUserPassword (Long id, String oldPassword, String newPassword){
+    public boolean updateUserPassword(Long id, String oldPassword, String newPassword) {
         Optional<UserInfo> userInfo = userRepository.findById(id);
         if (userInfo.isPresent()) {
             UserInfo presentUserInfo = userInfo.get();
-            if (passwordEncoder.matches(oldPassword,presentUserInfo.getPassword())){
+            if (passwordEncoder.matches(oldPassword, presentUserInfo.getPassword())) {
                 presentUserInfo.setPassword(passwordEncoder.encode(newPassword));
                 userRepository.save(presentUserInfo);
                 return true;
@@ -147,5 +148,19 @@ public class UserService implements UserDetailsService {
         }
         // jezeli cos pojdzie nie tak to zwraca to
         return false;
+    }
+
+    public boolean updateUserUsername(Long userId, String oldUsername, String newUsername) {
+        Optional<UserInfo> userInfo = userRepository.findById(userId);
+        if (userInfo.isPresent()) {
+            UserInfo presentUserInfo = userInfo.get();
+            if (oldUsername.matches(presentUserInfo.getUsername())) {
+                presentUserInfo.setUsername(newUsername);
+                userRepository.save(presentUserInfo);
+                return true;
+            }
+        }
+        return false;
+
     }
 }
