@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let allTasksCounter = 0;
     let completedTasksCounter = 0;
 
+    
 
     function updateTasksNumbers(){
         allTasksCard.innerText = allTasksCounter;

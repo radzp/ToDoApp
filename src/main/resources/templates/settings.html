@@ -11,6 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/images/circle_chec.ico" th:href="@{images/circle_chec.ico}">
     <script type="text/javascript" src="../static/js/settings.js" th:src="@{js/settings.js}"></script>
 
+
     <title>Settings</title>
 </head>
 <body>
@@ -79,7 +80,7 @@
                         <div class="settingsButton">
                             <form th:action="@{/user/logged/avatar}" th:method="put" enctype="multipart/form-data">
                                 <input class="button" type="file" accept="image/*" name="image" required>
-                                <input class="button" type="submit">
+                                <input id="submitBtn" class="button" type="submit">
                             </form>
                         </div>
                     </div>
@@ -157,7 +158,8 @@
 
                         <div class="settingsButton">
 
-                            <button class="button" id="usernameButton" onclick="checkUsername()">Change username</button>
+                            <button class="button" id="usernameButton" onclick="checkUsername()">Change username
+                            </button>
 
                         </div>
 
@@ -172,7 +174,30 @@
                     </div>
 
                     <div class="card-body">
-                        dwadwadawdaw
+                        <h4>You can change your theme here.</h4>
+                        <div class="themeBox">
+                            <div class="checkField first">
+                                <div class="imageWrapper">
+                                    <img src="" class="themeImg firstImg">
+                                </div>
+                                <div class="checkWrapper">
+                                    <label for="lightTheme">Light theme </label>
+                                    <input id="lightTheme" type="radio" name="theme" checked>
+                                </div>
+                            </div>
+
+
+                            <div class="checkField">
+                                <div class="imageWrapper">
+                                    <img src="" class="themeImg">
+                                </div>
+                                <div class="checkWrapper">
+                                    <label for="darkTheme">Dark theme </label>
+                                    <input id="darkTheme" type="radio" name="theme">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

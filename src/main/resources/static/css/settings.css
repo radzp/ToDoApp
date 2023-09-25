@@ -34,8 +34,8 @@
     border-color: var(--progress-bar);
 }
 .button::-webkit-file-upload-button {
-    background-color: #bdbdc0;
-    color: var(--text-black);
+    background-color: var(--background-color);
+    color: var(--text-default);
     border-radius: 10px;
     border: none;
     cursor:pointer;
@@ -54,6 +54,39 @@
 .passwordField:last-child,
 .usernameField:last-child {
     padding-bottom: 30px;
+}
+
+.checkField{
+    display: flex;
+    flex-direction: column;
+    margin-left: 55px;
+}
+.imageWrapper{
+    display: flex;
+    justify-content: center;
+}
+.checkWrapper{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    grid-gap: 10px;
+    flex-direction: row-reverse;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.themeBox{
+    display: flex;
+    grid-gap: 1rem;
+    align-items: baseline;
+    justify-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.themeImg{
+    width: 100px;
+    height: 100px;
 }
 
 .first {
@@ -104,6 +137,12 @@
 @media only screen and (max-width: 960px) {
     .recent-grid {
         grid-template-columns: 50% 50%;
+    }
+}
+
+@media only screen and (max-width: 918px) {
+    #submitBtn{
+        margin-top: 7px;
     }
 }
 

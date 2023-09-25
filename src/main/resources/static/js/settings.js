@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-
+    
     const usernameField = document.getElementById('usernameField');
     const authoritiesField = document.getElementById('authoritiesField');
     const avatarImage = document.getElementsByClassName('avatarImage');
     let username = null;
 
+    
     async function getUsername() {
         try {
             const response = await fetch('http://localhost:8080/user/logged/username');
@@ -58,6 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
     getAuthorities();
     getUserAvatar();
 
+
+    
 
 });
 

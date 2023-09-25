@@ -2,17 +2,30 @@
 
 :root {
     --main-color: #19335A;
-    --main-color-dark: #931f48;
     --background-color: #fff;
     --background-color-dark: #f1f5f9;
     --text-color: #fff;
     --color-dark: #1D2231;
     --text-grey: #8390A2;
-    --text-black: #000000;
+    --text-default: #000000;
     --button-add: #697A98;
     --button-green: #5a922a;
     --button-red: #A85658;
     --progress-bar: #4974bf;
+}
+
+:root:has(#darkTheme:checked){
+    --main-color: #6e56ee;
+    --progress-bar: #7d6af0;
+    --background-color: #212121;
+    --background-color-dark: #0e0e0e;
+    --text-default: white;
+    --text-grey: white;
+    --color-dark: white;
+}
+
+#usernameField{
+    color: var(--text-default);
 }
 
 * {
@@ -125,7 +138,7 @@ header {
     background: var(--background-color);
     display: flex;
     justify-content: space-between;
-    padding: 1rem 1.5rem;
+    padding: 1.3rem 1.5rem;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
     position: fixed;
     left: 345px;
@@ -140,7 +153,7 @@ header {
 }
 
 header h2 {
-    color: #222;
+    color: var(--color-dark);
 }
 
 header label span {
@@ -190,6 +203,7 @@ main {
     padding: 2rem 1.5rem;
     background: var(--background-color-dark);
     min-height: calc(100vh - 90px);
+    color: var(--text-default);
 }
 
 .cards {
@@ -583,7 +597,7 @@ h6.progress-info {
 
 .edit-input:valid {
     background-color: var(--background-color);
-    color: var(--text-black);
+    color: var(--text-default);
     border-radius: 10px;
     margin-left: 5px;
     border: solid 1px;
