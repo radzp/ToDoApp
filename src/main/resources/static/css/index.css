@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-:root {
+body {
     --main-color: #19335A;
     --background-color: #fff;
     --background-color-dark: #f1f5f9;
@@ -14,7 +14,7 @@
     --progress-bar: #4974bf;
 }
 
-:root:has(#darkTheme:checked){
+body.dark{
     --main-color: #6e56ee;
     --progress-bar: #7d6af0;
     --background-color: #212121;

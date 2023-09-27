@@ -5,6 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const avatarImage = document.getElementsByClassName('avatarImage');
     let username = null;
 
+    const darkMode = document.getElementById('darkTheme');
+    const lightTheme = document.getElementById('lightTheme');
+    
+    if (localStorage.getItem('theme') === 'dark'){
+        darkMode.checked = true;
+    }else {
+        lightTheme.checked = true;
+    }
     
     async function getUsername() {
         try {
