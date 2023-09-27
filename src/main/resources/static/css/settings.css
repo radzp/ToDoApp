@@ -7,16 +7,34 @@
 .avatarWrapper {
     padding: 30px;
     display: flex;
+    margin: auto;
     align-content: center;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+
+}
+
+#previewImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 500px;
+    max-width: 500px;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
 }
 .settingsButton {
+    padding-top: 17px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-bottom: 17px;
+    padding-bottom: 75px;
 }
 .button {
     background: var(--main-color);
@@ -67,12 +85,13 @@
 }
 .checkWrapper{
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     display: flex;
     grid-gap: 10px;
-    flex-direction: row-reverse;
     align-items: baseline;
-    justify-content: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
 }
 
 .themeBox{
@@ -85,8 +104,10 @@
 }
 
 .themeImg{
-    width: 100px;
-    height: 100px;
+    width: calc(100% - 20px);
+    height: 190px;
+    border-radius: 20px;
+    margin-right: 40px;
 }
 
 .first {
@@ -98,16 +119,14 @@
     font-size: 1.2rem;
 }
 
-#previewImage {
-    width: 400px;
-    height: 400px;
-}
+
 
 .card {
     height: 100%;
 }
 
 .card-body h4 {
+    margin-top: 19px;
     margin-left: 1rem;
     margin-right: 1rem;
 }
@@ -141,6 +160,11 @@
 }
 
 @media only screen and (max-width: 918px) {
+    #submitBtn{
+        margin-top: 7px;
+    }
+}
+@media only screen and (max-width: 1217px) {
     #submitBtn{
         margin-top: 7px;
     }

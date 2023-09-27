@@ -20,7 +20,7 @@
 <input type="checkbox" id="nav-toggle">
 <div class="sidebar-container">
     <div class="sidebar-brand">
-        <h2><span class="lab la-accusoft"></span><span>Accusoft</span></h2>
+        <h2><span class="las la-crow"></span><span>AMW</span></h2>
     </div>
 
     <div class="sidebar-menu">
@@ -54,7 +54,7 @@
 
 
         <div class="user-wrapper">
-            <img id="avatarImage" class="avatarImage" src="" width="40px" height="40px" alt="">
+            <img id="avatarImage" class="avatarImage" src="../static/images/default_avatar.png" width="40px" height="40px" alt="">
             <div>
                 <h4 id="usernameField">Unknown</h4>
                 <small id="authoritiesField">none</small>
@@ -76,7 +76,7 @@
                     <div class="card-body">
                         <h4>You can change your profile avatar. Upload an image you want</h4>
                         <div class="avatarWrapper">
-                            <img id="previewImage" class="avatarImage" src="" alt="">
+                            <img id="previewImage" class="avatarImage" th:src="@{images/default_avatar.png}" src="../static/images/default_avatar.png" alt="">
                         </div>
                         <div class="settingsButton">
                             <form th:action="@{/user/logged/avatar}" th:method="put" enctype="multipart/form-data">
@@ -179,7 +179,7 @@
                         <div class="themeBox">
                             <div class="checkField first">
                                 <div class="imageWrapper">
-                                    <img src="" class="themeImg firstImg">
+                                    <img th:src="@{images/lightMode.png}" src="../static/images/lightMode.png" class="themeImg firstImg">
                                 </div>
                                 <div class="checkWrapper">
                                     <label for="lightTheme">Light theme </label>
@@ -190,7 +190,7 @@
 
                             <div class="checkField">
                                 <div class="imageWrapper">
-                                    <img src="" class="themeImg">
+                                    <img th:src="@{images/darkMode.png}" src="../static/images/darkMode.png" class="themeImg">
                                 </div>
                                 <div class="checkWrapper">
                                     <label for="darkTheme">Dark theme </label>
